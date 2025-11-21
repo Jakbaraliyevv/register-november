@@ -73,7 +73,7 @@ export const HomePage = () => {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-200 to-cyan-100 relative overflow-hidden"
+      className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-200 to-cyan-100 relative overflow-hidden flex flex-col"
       style={{ height: "100vh" }}
     >
       {/* Background Elements */}
@@ -83,39 +83,38 @@ export const HomePage = () => {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div className="flex items-center w-[180px] gap-4">
+      <header className="relative z-10 p-4 sm:p-6 flex justify-between items-center">
+        <div className="flex items-center w-[120px] sm:w-[140px] md:w-[180px]">
           <img src="https://raqamliavlod.uz/static/svg/logo-word.svg" alt="" />
-          <div></div>
         </div>
 
         <a
           href="https://t.me/digitalgeneration_uz"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-3 rounded-full text-white font-bold text-sm shadow-lg hover:shadow-xl transition-all"
+          className="flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-500 to-cyan-500 px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-full text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all"
         >
-          <span className="w-[40px]">
+          <span className="w-[25px] sm:w-[30px] md:w-[40px]">
             <img src={telegram} alt="" />
           </span>
-          Telegram kanal
+          <span className="hidden sm:inline">Telegram kanal</span>
         </a>
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 flex flex-col items-center justify-center px-4  h-[calc(100vh-120px)]">
+      <main className="relative z-10 flex flex-col items-center justify-center px-4 flex-1">
         {/* Title Section */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-2 sm:mb-3 md:mb-4">
             Ro'yxatdan o'tish
           </h2>
         </div>
 
         {/* Rotating Carousel Container */}
-        <div className="relative w-[500px] h-[500px] flex items-center justify-center">
+        <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] flex items-center justify-center">
           {/* Rotating Directions */}
           <div
-            className="relative w-[450px] h-[450px]"
+            className="relative w-[250px] h-[250px] sm:w-[360px] sm:h-[360px] md:w-[450px] md:h-[450px]"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -127,7 +126,7 @@ export const HomePage = () => {
             {directions.map((direction, index) => {
               const angle = (index * 120 + rotation) % 360;
               const radian = (angle * Math.PI) / 180;
-              const radius = 180;
+              const radius = window.innerWidth < 640 ? 100 : window.innerWidth < 768 ? 140 : 180;
               const x = Math.cos(radian) * radius;
               const y = Math.sin(radian) * radius;
 
@@ -143,10 +142,10 @@ export const HomePage = () => {
                   <button
                     onClick={() => handleDirectionClick(direction.path)}
                     className={`
-                      w-32 h-32 group relative bg-gradient-to-br ${direction.gradient} 
+                      w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 group relative bg-gradient-to-br ${direction.gradient} 
                       rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 
-                      transform hover:scale-125 flex flex-col items-center justify-center gap-1 
-                      border-4 border-white/80 hover:border-white
+                      transform hover:scale-125 flex flex-col items-center justify-center gap-0.5 sm:gap-1 
+                      border-2 sm:border-3 md:border-4 border-white/80 hover:border-white
                     `}
                     style={{
                       clipPath:
@@ -163,12 +162,12 @@ export const HomePage = () => {
                     ></div>
 
                     {/* Icon */}
-                    <span className="relative z-10 transform group-hover:scale-110 transition-transform duration-300 drop-shadow-lg text-4xl">
+                    <span className="relative z-10 transform group-hover:scale-110 transition-transform duration-300 drop-shadow-lg text-2xl sm:text-3xl md:text-4xl">
                       {direction.icon}
                     </span>
 
                     {/* Name */}
-                    <span className="text-white font-bold text-center px-1 relative z-10 text-sm drop-shadow-lg leading-tight">
+                    <span className="text-white font-bold text-center px-1 relative z-10 text-[10px] sm:text-xs md:text-sm drop-shadow-lg leading-tight">
                       {direction.name}
                     </span>
 
@@ -186,16 +185,16 @@ export const HomePage = () => {
             })}
 
             {/* Center Circle */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full border-4 border-white shadow-2xl flex items-center justify-center">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full border-2 sm:border-3 md:border-4 border-white shadow-2xl flex items-center justify-center">
               <div className="text-white text-center">
-                <div className="text-xl font-bold">Yo'nalish</div>
-                <div className="text-sm">Tanlang</div>
+                <div className="text-sm sm:text-base md:text-xl font-bold">Yo'nalish</div>
+                <div className="text-[10px] sm:text-xs md:text-sm">Tanlang</div>
               </div>
             </div>
 
             {/* Outer Ring */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border-4 border-blue-300/30 rounded-full animate-pulse"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 border-2 border-cyan-300/20 rounded-full"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 border-2 sm:border-3 md:border-4 border-blue-300/30 rounded-full animate-pulse"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 border-1 sm:border-2 border-cyan-300/20 rounded-full"></div>
           </div>
         </div>
 
@@ -203,8 +202,19 @@ export const HomePage = () => {
         <div className="text-center mt-8"></div>
 
         {/* Footer */}
-        <div className="mt-6 mb-6 text-center">
-          <p className="text-blue-700 font-medium text-[14px]">
+        <div className="mt-auto pt-4 sm:pt-5 md:pt-6 pb-4 sm:pb-5 md:pb-6 text-center px-4">
+          <a
+            href="https://t.me/digitalgeneration_uz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-500 px-5 py-2.5 rounded-full text-white font-bold text-sm shadow-lg hover:shadow-xl transition-all mb-3"
+          >
+            <span className="w-[30px]">
+              <img src={telegram} alt="" />
+            </span>
+            Telegram kanal
+          </a>
+          <p className="text-blue-700 font-medium text-xs sm:text-sm md:text-[14px]">
             Natijalarni bilish uchun Digital Generation telegram kanaliga obuna
             bo'ling
           </p>
